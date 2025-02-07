@@ -8,7 +8,9 @@
     "dev:webhook": "ngrok http --url=kind-woodcock-frankly.ngrok-free.app 3000",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "drizzle":"bunx drizzle-kit push",
+    "drizzle-studio":"bunx drizzle-kit studio"
   },
   "dependencies": {
     "@clerk/nextjs": "6.10.3",
