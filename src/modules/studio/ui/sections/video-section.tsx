@@ -1,8 +1,16 @@
 "use client";
 
 import { InfiniteScroll } from "@/components/infinite-scroll";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { DEFAULT_LIMIT } from "@/constants";
+import { VideoThumbnail } from "@/modules/videos/ui/components/video-thumbnil";
 import { trpc } from "@/trpc/client";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -42,36 +50,35 @@ const VideoSectionSuspense = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {
-              videos.pages.flatMap((page)=>page.items).map((video)=>(
-                <Link href={`/studio/videos/${video.id}`} key={video.id} legacyBehavior>
-                <TableRow className="cursor-pointer">
-                <TableCell>
-                  {video.title}
-                </TableCell>
-                <TableCell>
-                  Visibility
-                </TableCell>
-                <TableCell>
-                  Status
-                </TableCell>
-                <TableCell>
-                  Dates
-                </TableCell>
-                <TableCell className="text-right">
-                  Views
-                </TableCell>
-                <TableCell className="text-right">
-                  Comments
-                </TableCell>
-                <TableCell className="text-right pr-6">
-                  Likes
-                </TableCell>
-                </TableRow>
-                
+            {videos.pages
+              .flatMap((page) => page.items)
+              .map((video) => (
+                <Link
+                  href={`/studio/videos/${video.id}`}
+                  key={video.id}
+                  legacyBehavior
+                >
+                  <TableRow className="cursor-pointer">
+                    <TableCell>
+                      <div className="flex items-center gap-4">
+                        <div className="relative aspect-video w-36 shrink-0">
+                          <VideoThumbnail imageUrl={video.thumbnailUrl} previewUrl={video.previewUrl} 
+                          title= {video.title}
+                          duration={video.duration || 0}
+                          />
+                          
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell>Visibility</TableCell>
+                    <TableCell>Status</TableCell>
+                    <TableCell>Dates</TableCell>
+                    <TableCell className="text-right">Views</TableCell>
+                    <TableCell className="text-right">Comments</TableCell>
+                    <TableCell className="text-right pr-6">Likes</TableCell>
+                  </TableRow>
                 </Link>
-              ))
-            }
+              ))}
           </TableBody>
         </Table>
       </div>

@@ -1,5 +1,10 @@
 import { Button } from "@/components/ui/button";
-import MuxUploader, { MuxUploaderDrop, MuxUploaderFileSelect, MuxUploaderProgress, MuxUploaderStatus } from "@mux/mux-uploader-react";
+import MuxUploader, {
+  MuxUploaderDrop,
+  MuxUploaderFileSelect,
+  MuxUploaderProgress,
+  MuxUploaderStatus,
+} from "@mux/mux-uploader-react";
 import { UploadIcon } from "lucide-react";
 interface StudioUploaderProps {
   endpoint: string | null;
@@ -13,7 +18,7 @@ export const StudioUploader = ({
   return (
     <div>
       <MuxUploader
-      onSuccess={onSuccess}
+        onSuccess={onSuccess}
         endpoint={endpoint}
         id="video-uploader"
         className="hidden group/uploader"
@@ -33,17 +38,18 @@ export const StudioUploader = ({
           </div>
           <MuxUploaderFileSelect muxUploader="video-uploader">
             <Button type="button" className="rounded-full">
-                Select Files
+              Select Files
             </Button>
           </MuxUploaderFileSelect>
         </div>
         <span slot="separator" className="hidden"></span>
-        <MuxUploaderStatus
-        muxUploader="video-uploader"
-        className="text-sm"
+        <MuxUploaderStatus muxUploader="video-uploader" className="text-sm" />
+        <MuxUploaderProgress
+          muxUploader="video-uploader"
+          className="text-sm"
+          type="percentage"
         />
-        <MuxUploaderProgress muxUploader="video-uploader" className="text-sm" type="percentage"/>
-        <MuxUploaderProgress muxUploader="video-uploader" type="bar"/> 
+        <MuxUploaderProgress muxUploader="video-uploader" type="bar" />
       </MuxUploaderDrop>
     </div>
   );
